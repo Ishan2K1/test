@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  test
-//
-//  Created by Amit Khandelwal on 08/08/24.
-//
-
 import SwiftUI
 
 struct CustomTabView: View {
@@ -12,6 +5,7 @@ struct CustomTabView: View {
 
     var body: some View {
         VStack {
+            // Display the content based on the selected tab
             if selectedTab == 0 {
                 FirstView()
             } else if selectedTab == 1 {
@@ -22,6 +16,7 @@ struct CustomTabView: View {
 
             Spacer()
 
+            // Custom navbar that remains visible on all pages
             ZStack {
                 HStack {
                     Spacer()
@@ -36,19 +31,8 @@ struct CustomTabView: View {
 
                     Spacer()
 
-                    Button(action: {
-                        selectedTab = 1
-                    }) {
-                        Image("customIcon")
-                            .resizable()
-                            .aspectRatio(contentMode: .fit)
-                            .frame(width: 50, height: 50)
-                            .clipShape(Circle())
-                            .overlay(
-                                Circle()
-                                    .stroke(Color.white, lineWidth: 2)
-                            )
-                    }
+                    // Invisible spacer to create space for the large middle button
+                    Spacer().frame(width: 80)  // Adjust this value to control spacing
 
                     Spacer()
 
@@ -66,6 +50,19 @@ struct CustomTabView: View {
                 .background(Color(.systemGray6))
                 .clipShape(Capsule())
                 .shadow(radius: 5)
+
+                // Large middle button
+                Button(action: {
+                    selectedTab = 1
+                }) {
+                    Image(systemName: "face.smiling")
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                        .frame(width: 70, height: 70)  // Adjust the size of the circle
+                        .background(Circle().fill(Color.white))
+                        .shadow(radius: 5)
+                }
+                .offset(y: -20)  // Adjust this value to make the circle float above the navbar
             }
         }
         .edgesIgnoringSafeArea(.bottom)
